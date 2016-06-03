@@ -32,12 +32,15 @@ void ***mymalloc3(int n1, int n2, int n3, int size)
 
 	int i,j;
 
+	printf("%d %d %d %d\n", n1, n2, n3, size);
+
 	p = mymalloc((int)sizeof(void*)*n1);
+    //p = mymalloc(size*n1);
 
 //	p = *(mymalloc2(n1, n2, (int)sizeof(void *) * n1));
 
 	for (i = 0; i < n1; i++)
-		p[i] = mymalloc(size * n2);
+		p[i] = mymalloc((int)sizeof(void*) * n2);
 
 	for (j = 0; j < n1; j++)
 		for (i = 0; i < n2; i++)

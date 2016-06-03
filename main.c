@@ -114,6 +114,16 @@ int main()
 	ptr_pupil_info->a = 0;
 	ptr_pupil_info->b =0 ;
 
+    hough_circle(ptr_canny_image, ptr_pupil_info);
+
+	roi_image.height = ptr_pupil_info->radius * 2 + 100;
+	roi_image.width = ptr_pupil_info->radius * 2 + 100;
+	roi_image.pixel = (unsigned char**)mymalloc2(roi_image.height, roi_image.width, sizeof(unsigned char));
+
+	ori_roi_image.height = ptr_pupil_info->radius * 2 + 100;
+	ori_roi_image.width = ptr_pupil_info->radius * 2 + 100;
+	ori_roi_image.pixel = (unsigned char**)mymalloc2(roi_image.height, roi_image.width, sizeof(unsigned char));
+
     printf("-- FINISHED --\n");
     return 0;
 }

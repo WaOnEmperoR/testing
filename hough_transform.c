@@ -4,6 +4,17 @@
 #include "hough_transform.h"
 #include "structs.h"
 
+#define    L_MAX     256
+#define    L_BASE    5        // base value for connected component extraction
+#define    MASK_SIZE 5        // filter mask 5x5
+#define    LOW       0        // object is black
+#define    MID1      64					// 85					// 64					//128      // object is black
+#define 	 MID2			 128						// 170				// 128
+#define 	 MID3 	   192
+#define    HIGH      255      // background is white
+#define    OBJECT_INTENSITY   HIGH
+#define 	 PI				 3.1415926536
+
 void hough_line(T_IMAGE *ptr_binary_image, T_IMAGE *ptr_accu_image, T_COORDINATE *ptr_hough_coordinate)
 {
 	int height = ptr_binary_image->height;
@@ -70,7 +81,9 @@ void hough_circle(T_IMAGE *ptr_binary_image, T_PUPIL_INFO *ptr_pupil_info)
 		}
 	}
 
-	int ***hough_circle_accu = (int***)mymalloc3(height, width, radius_limit_max - radius_limit_min, sizeof(int));
+    int range = radius_limit_max - radius_limit_min;
+
+	int ***hough_circle_accu = (int***)mymalloc3(height, width, range, sizeof(int));
 /*
 	int height_start = height/2 - 55;
 	int height_stop = height/2 + 55;
@@ -85,10 +98,22 @@ void hough_circle(T_IMAGE *ptr_binary_image, T_PUPIL_INFO *ptr_pupil_info)
 	int width_start = 0;
 	int width_stop = width;
 
-	for (j = 0; j < height; j++)
+    for (j = 0; j < height; j++)
+    {
 		for (i = 0; i < width; i++)
-			for (k = 0; k < (radius_limit_max - radius_limit_min); k++)
-				hough_circle_accu[j][i][k] = 0;
+		{
+			for (k = 0; k < range; k++)
+			{
+                hough_circle_accu[j][i][k] = 0;
+			}
+        }
+    }
+
+
+	//for (j = 0; j < height; j++)
+		//for (i = 0; i < width; i++)
+			//for (k = 0; k < (radius_limit_max - radius_limit_min); k++)
+				//hough_circle_accu[j][i][k] = 0;
 
 	for (j = height_start; j < height_stop; j++) {
 		for (i = width_start; i < width_stop; i++) {
