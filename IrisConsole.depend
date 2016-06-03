@@ -77,3 +77,81 @@
 	<string.h>
 	"structs.h"
 
+1464854055 source:/home/waonemperor/git/testing/edgedetect.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"edgedetect.h"
+	"structs.h"
+
+1464857232 /home/waonemperor/git/testing/edgedetect.h
+	<stdlib.h>
+	<string.h>
+	"structs.h"
+	"spatialfiltering.h"
+
+1464865095 /home/waonemperor/git/testing/structs.h
+	<stdio.h>
+	<stdlib.h>
+
+1464857749 /home/waonemperor/git/testing/spatialfiltering.h
+	"structs.h"
+
+1464854960 source:/home/waonemperor/git/testing/histopreprocessing.c
+	<stdio.h>
+	<stdlib.h>
+	"histopreprocessing.h"
+
+1464854839 /home/waonemperor/git/testing/histopreprocessing.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	"structs.h"
+
+1464853868 source:/home/waonemperor/git/testing/intensitytransform.c
+	<stdio.h>
+	<stdlib.h>
+	"intensitytransform.h"
+
+1464853706 /home/waonemperor/git/testing/intensitytransform.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	"structs.h"
+
+1464924936 source:/home/waonemperor/git/testing/iomalloc.c
+	"iomalloc.h"
+
+1464851396 /home/waonemperor/git/testing/iomalloc.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	"structs.h"
+
+1464926599 source:/home/waonemperor/git/testing/main.c
+	<stdio.h>
+	<stdlib.h>
+	"iomalloc.h"
+
+1464866894 source:/home/waonemperor/git/testing/morphprocessing.c
+	<stdlib.h>
+	<string.h>
+	"structs.h"
+
+1464865150 source:/home/waonemperor/git/testing/parser.c
+	<stdlib.h>
+	<string.h>
+	"structs.h"
+	"parser.h"
+
+1464864280 /home/waonemperor/git/testing/parser.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+
+1464857268 source:/home/waonemperor/git/testing/spatialfiltering.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"spatialfiltering.h"
+
