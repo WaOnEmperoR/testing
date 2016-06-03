@@ -1,0 +1,79 @@
+# depslib dependency file v1.0
+1464924495 source:/home/waonemperor/PTIKBiometrik/IrisConsole/main.c
+	<stdio.h>
+	<stdlib.h>
+	"iomalloc.h"
+
+1464851396 /home/waonemperor/PTIKBiometrik/IrisConsole/iomalloc.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	"structs.h"
+
+1464865095 /home/waonemperor/PTIKBiometrik/IrisConsole/structs.h
+	<stdio.h>
+	<stdlib.h>
+
+1464924936 source:/home/waonemperor/PTIKBiometrik/IrisConsole/iomalloc.c
+	"iomalloc.h"
+
+1464854055 source:/home/waonemperor/PTIKBiometrik/IrisConsole/edgedetect.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"edgedetect.h"
+	"structs.h"
+
+1464857232 /home/waonemperor/PTIKBiometrik/IrisConsole/edgedetect.h
+	<stdlib.h>
+	<string.h>
+	"structs.h"
+	"spatialfiltering.h"
+
+1464853868 source:/home/waonemperor/PTIKBiometrik/IrisConsole/intensitytransform.c
+	<stdio.h>
+	<stdlib.h>
+	"intensitytransform.h"
+
+1464853706 /home/waonemperor/PTIKBiometrik/IrisConsole/intensitytransform.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	"structs.h"
+
+1464854960 source:/home/waonemperor/PTIKBiometrik/IrisConsole/histopreprocessing.c
+	<stdio.h>
+	<stdlib.h>
+	"histopreprocessing.h"
+
+1464854839 /home/waonemperor/PTIKBiometrik/IrisConsole/histopreprocessing.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	"structs.h"
+
+1464857749 /home/waonemperor/PTIKBiometrik/IrisConsole/spatialfiltering.h
+	"structs.h"
+
+1464857268 source:/home/waonemperor/PTIKBiometrik/IrisConsole/spatialfiltering.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"spatialfiltering.h"
+
+1464865150 source:/home/waonemperor/PTIKBiometrik/IrisConsole/parser.c
+	<stdlib.h>
+	<string.h>
+	"structs.h"
+	"parser.h"
+
+1464864280 /home/waonemperor/PTIKBiometrik/IrisConsole/parser.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+
+1464866894 source:/home/waonemperor/PTIKBiometrik/IrisConsole/morphprocessing.c
+	<stdlib.h>
+	<string.h>
+	"structs.h"
+
