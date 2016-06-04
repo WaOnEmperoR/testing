@@ -97,6 +97,12 @@
 		<Unit filename="structs.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="thresholding.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="thresholding.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />

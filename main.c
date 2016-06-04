@@ -187,6 +187,27 @@ int main()
     write_output(path, ptr_otsu_unwrapped_image);
     path[0] = '\0';
 
+    ptr_iriscode->bit = malloc((RADIUS * THETA * 2) * sizeof(unsigned char));
+    ptr_iriscode->size = RADIUS * THETA * 2;
+    ptr_iriscode->mask = malloc((RADIUS * THETA * 2) * sizeof(unsigned char));
+
+    for (int j = 0; j < ptr_iriscode->size; j++)
+    {
+        ptr_iriscode->bit[j] = 0;
+        ptr_iriscode->mask[j] = 0;
+    }
+
+    gabor_filtering(ptr_unwrapped_image, ptr_gabor_real_image, ptr_gabor_imag_image, ptr_iriscode, ptr_otsu_unwrapped_image);
+
+    myfree2((void **)ptr_gabor_real_image->pixel, RADIUS);
+    myfree2((void **)ptr_gabor_imag_image->pixel, RADIUS);
+    myfree2((void **)ptr_roi_image->pixel, ptr_roi_image->height);
+    myfree2((void **)ptr_ori_image->pixel, image_height);
+    myfree2((void **)ptr_my_image->pixel, image_height);
+    myfree2((void **)ptr_unwrapped_image->pixel, RADIUS);
+    myfree2((void **)ptr_otsu_unwrapped_image->pixel, ptr_otsu_unwrapped_image->height);
+    myfree2((void **)ptr_ori_roi_image->pixel, ptr_ori_roi_image->height);
+
     printf("-- FINISHED --\n");
     return 0;
 }
