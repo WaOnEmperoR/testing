@@ -43,6 +43,12 @@
 		<Unit filename="histopreprocessing.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="hough_transform.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="hough_transform.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="intensitytransform.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -55,6 +61,12 @@
 		<Unit filename="iomalloc.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="iris_processing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="iris_processing.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -62,6 +74,12 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="morphprocessing.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="padding.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="padding.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="parser.c">

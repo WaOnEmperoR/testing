@@ -3,9 +3,6 @@
 #include "structs.h"
 #include "parser.h"
 
-#define RADIUS 20
-#define THETA 180
-
 char *dir_parser(char *full_path)
 {
 	int i;

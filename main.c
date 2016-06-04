@@ -34,6 +34,24 @@ int main()
     T_PUPIL_INFO pupil_info;
     T_PUPIL_INFO *ptr_pupil_info = &pupil_info;
 
+    T_IRIS_BOUNDARY iris_boundary;
+    T_IRIS_BOUNDARY *ptr_iris_boundary = &iris_boundary;
+
+    T_IRISCODE *ptr_iriscode = &iriscode;
+
+    T_IRISCODE *ptr_irismask = &irismask;
+
+    T_IMAGE unwrapped_image;
+    T_IMAGE *ptr_unwrapped_image = &unwrapped_image;
+
+    T_IMAGE otsu_unwrapped_image;
+    T_IMAGE *ptr_otsu_unwrapped_image = &otsu_unwrapped_image;
+
+    T_IMAGE gabor_real_image;
+    T_IMAGE *ptr_gabor_real_image = &gabor_real_image;
+
+    T_IMAGE gabor_imag_image;
+    T_IMAGE *ptr_gabor_imag_image = &gabor_imag_image;
     /*printf("%d %d\n", sizeof(unsigned char), sizeof(short));
     int image_height, image_width;
     pixel = read_image("/home/waonemperor/Documents/MMU_db_input/5/right/chongpkr5.pgm", &image_height, &image_width);
@@ -132,9 +150,42 @@ int main()
     ori_roi_image.width = ptr_pupil_info->radius * 2 + 100;
     ori_roi_image.pixel = (unsigned char**)mymalloc2(roi_image.height, roi_image.width, sizeof(unsigned char));
 
-    for (j = 0; j < ori_roi_image.height; j++)
-        for (i = 0; i < ori_roi_image.width; i++)
+    for (int j = 0; j < ori_roi_image.height; j++)
+        for (int i = 0; i < ori_roi_image.width; i++)
             ori_roi_image.pixel[j][i] = 255;
+
+    find_pupillary_limbus_boundary (ptr_my_image, ptr_roi_image, ptr_ori_image, ptr_ori_roi_image, ptr_pupil_info, ptr_iris_boundary);
+
+    ptr_unwrapped_image->height = RADIUS;
+    ptr_unwrapped_image->width = THETA;
+    ptr_unwrapped_image->pixel = (unsigned char**)mymalloc2(RADIUS, THETA, sizeof(unsigned char));
+
+    ptr_otsu_unwrapped_image->height = RADIUS;
+    ptr_otsu_unwrapped_image->width = THETA;
+    ptr_otsu_unwrapped_image->pixel = (unsigned char**)mymalloc2(RADIUS, THETA, sizeof(unsigned char));
+
+    ptr_gabor_real_image->height = RADIUS;
+    ptr_gabor_real_image->width = THETA;
+    ptr_gabor_real_image->pixel = (unsigned char**)mymalloc2(RADIUS, THETA, sizeof(unsigned char));
+
+    ptr_gabor_imag_image->height = RADIUS;
+    ptr_gabor_imag_image->width = THETA;
+    ptr_gabor_imag_image->pixel = (unsigned char**)mymalloc2(RADIUS, THETA, sizeof(unsigned char));
+
+    // UNWRAP IRIS //
+    iris_unwrapping(ptr_ori_image, ptr_iris_boundary, ptr_pupil_info, ptr_unwrapped_image);
+    path = build_result_path(result_dir_path, "iris-unwrapped.pgm");
+    write_output(path, ptr_unwrapped_image);
+    sprintf(unwrapped_path, "%s", path);
+    path[0] = '\0';
+
+// NOISE MASK //
+    otsu_optimum_global_thr_binarization(ptr_unwrapped_image, ptr_otsu_unwrapped_image);
+    complement(ptr_otsu_unwrapped_image);
+    check_otsu(ptr_otsu_unwrapped_image);
+    path = build_result_path(result_dir_path, "otsu-iris-unwrapped.pgm");
+    write_output(path, ptr_otsu_unwrapped_image);
+    path[0] = '\0';
 
     printf("-- FINISHED --\n");
     return 0;

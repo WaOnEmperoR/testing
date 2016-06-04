@@ -4,6 +4,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define RADIUS 20
+#define THETA 180
+#define    L_MAX     256
+#define    L_BASE    5        // base value for connected component extraction
+#define    MASK_SIZE 5        // filter mask 5x5
+#define    LOW       0        // object is black
+#define    MID1      64					// 85					// 64					//128      // object is black
+#define 	 MID2			 128						// 170				// 128
+#define 	 MID3 	   192
+#define    HIGH      255      // background is white
+#define    OBJECT_INTENSITY   HIGH
+#define 	 PI				 3.1415926536
+
 typedef struct HD_NORM
 {
     float HD;
@@ -94,6 +107,12 @@ char *unwrapped_path;
 char *gabor_real_path;
 char *gabor_imag_path;
 
+char * bit_string;
+char * bit_mask_string;
+
+T_IRISCODE iriscode;
+
+T_IRISCODE irismask;
 #endif // STRUCTS_H_INCLUDED
 
 
