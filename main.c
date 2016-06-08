@@ -52,6 +52,9 @@ int main()
 
     T_IMAGE gabor_imag_image;
     T_IMAGE *ptr_gabor_imag_image = &gabor_imag_image;
+
+    unsigned char cc = 10;
+    printf("%f\n", (float) cc);
     /*printf("%d %d\n", sizeof(unsigned char), sizeof(short));
     int image_height, image_width;
     pixel = read_image("/home/waonemperor/Documents/MMU_db_input/5/right/chongpkr5.pgm", &image_height, &image_width);
@@ -177,6 +180,11 @@ int main()
     path = build_result_path(result_dir_path, "iris-unwrapped.pgm");
     write_output(path, ptr_unwrapped_image);
     sprintf(unwrapped_path, "%s", path);
+    path[0] = '\0';
+
+    path = build_result_path(result_dir_path, "iris-unwrapped.txt");
+    write_output(path, ptr_unwrapped_image);
+    write_txt_img(path, ptr_unwrapped_image);
     path[0] = '\0';
 
 // NOISE MASK //

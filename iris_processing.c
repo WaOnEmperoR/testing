@@ -457,7 +457,22 @@ void gabor_filtering (T_IMAGE *ptr_unwrapped_image, T_IMAGE *ptr_gabor_real_imag
     for (j = 0; j < rows; j++)
         for (i = 0; i < rows; i++)
             matrix2D[j][i] = 0;
-    gaussian2Delliptical(matrix2D, gauss_radius, 5, 4, 0);
+
+    printf("Ket : %f %d\n", gauss_radius, rows);
+
+    int pass = (int) gauss_radius;
+
+    float sigmax = (float) 5.00;
+    float sigmay = (float) 4.00;
+    int rotation = (int) 0;
+
+    printf("Param : %f %f %f %d\n", gauss_radius, sigmax, sigmay, rotation);
+
+    gaussian2Delliptical(matrix2D, gauss_radius, sigmax, sigmay, rotation);
+
+    path = build_result_path(result_dir_path, "Matrix_2D.csv");
+    write_txt_arr(path, matrix2D, rows, rows);
+    path[0] = '\0';
 
     float **real = (float**)mymalloc2(rows, rows, sizeof(float));
     float **imag = (float**)mymalloc2(rows, rows, sizeof(float));
@@ -469,11 +484,19 @@ void gabor_filtering (T_IMAGE *ptr_unwrapped_image, T_IMAGE *ptr_gabor_real_imag
         for (i = 0; i < g_size; i++)
         {
             calc = -2 * M_PI * (u0 * (i - x0) + v0 * (j - y0)) * M_PI / 180;
-            //		printf("calc %f\n", calc);
             real[j][i] = cos (calc);
             imag[j][i] = sin (calc);
+            //printf("calc %f\n", calc);
         }
     }
+
+    path = build_result_path(result_dir_path, "real_part.csv");
+    write_txt_arr(path, real, g_size, g_size);
+    path[0] = '\0';
+
+    path = build_result_path(result_dir_path, "imaginary_part.csv");
+    write_txt_arr(path, imag, g_size, g_size);
+    path[0] = '\0';
 
     float **real_gabor = (float**)mymalloc2(rows, rows, sizeof(float));
     float **imag_gabor = (float**)mymalloc2(rows, rows, sizeof(float));
@@ -549,6 +572,32 @@ void gabor_filtering (T_IMAGE *ptr_unwrapped_image, T_IMAGE *ptr_gabor_real_imag
 
     padding(ptr_unwrapped_image, r, ptr_padded_image);
 
+    path = build_result_path(result_dir_path, "ptr_padded_image.pgm");
+    write_output(path, ptr_padded_image);
+    path[0] = '\0';
+
+    float **konversiku = (float**)mymalloc2(padded_image.height, padded_image.width, sizeof(float));
+
+    for (int p=0; p<padded_image.height; p++)
+    {
+        for (int q=0; q<padded_image.width; q++)
+        {
+            konversiku[p][q] = (float) ptr_padded_image->pixel[p][q];
+        }
+    }
+
+    path = build_result_path(result_dir_path, "ptr_pad_img.csv");
+    write_txt_arr(path, konversiku, padded_image.height, padded_image.width);
+    path[0] = '\0';
+
+    path = build_result_path(result_dir_path, "real_gabor.csv");
+    write_txt_arr(path, real_gabor, g_size, g_size);
+    path[0] = '\0';
+
+    path = build_result_path(result_dir_path, "imag_gabor.csv");
+    write_txt_arr(path, imag_gabor, g_size, g_size);
+    path[0] = '\0';
+
     for (j = r; j < padded_image.height-r; j++)
     {
         for (i = r; i < padded_image.width-r; i++)
@@ -557,14 +606,25 @@ void gabor_filtering (T_IMAGE *ptr_unwrapped_image, T_IMAGE *ptr_gabor_real_imag
             {
                 for (x = -r; x <= r; x++)
                 {
-                    new_pixel_real[j-r][i-r] += real_gabor[y+r][x+r] * ptr_padded_image->pixel[j+y][i+x];
-                    new_pixel_imag[j-r][i-r] += imag_gabor[y+r][x+r] * ptr_padded_image->pixel[j+y][i+x];
+                    //new_pixel_real[j-r][i-r] += real_gabor[y+r][x+r] * ptr_padded_image->pixel[j+y][i+x];
+                    //new_pixel_imag[j-r][i-r] += imag_gabor[y+r][x+r] * ptr_padded_image->pixel[j+y][i+x];
+
+                    new_pixel_real[j-r][i-r] += real_gabor[y+r][x+r] * konversiku[j+y][i+x];
+                    new_pixel_imag[j-r][i-r] += imag_gabor[y+r][x+r] * konversiku[j+y][i+x];
                 }
             }
             //	printf("new_pixel_real %f\t", new_pixel_real[j-r][i-r]);
             //	printf("new_pixel_imag %f\n", new_pixel_imag[j-r][i-r]);
         }
     }
+
+    path = build_result_path(result_dir_path, "NP_real_part.csv");
+    write_txt_arr(path, new_pixel_real, radius, theta);
+    path[0] = '\0';
+
+    path = build_result_path(result_dir_path, "NP_imaginary_part.csv");
+    write_txt_arr(path, new_pixel_imag, radius, theta);
+    path[0] = '\0';
 
     for (j = 0; j < radius; j++)
         for (i = 0; i < theta; i++)
@@ -676,8 +736,16 @@ void gabor_filtering (T_IMAGE *ptr_unwrapped_image, T_IMAGE *ptr_gabor_real_imag
     write_output(path, ptr_real_image);
     path[0] = '\0';
 
+    path = build_result_path(result_dir_path, "ptr_real_image.csv");
+    write_txt_img(path, ptr_real_image);
+    path[0] = '\0';
+
     path = build_result_path(result_dir_path, "ptr_imag_image.pgm");
     write_output(path, ptr_imag_image);
+    path[0] = '\0';
+
+    path = build_result_path(result_dir_path, "ptr_imag_image.csv");
+    write_txt_img(path, ptr_imag_image);
     path[0] = '\0';
 
     path = build_result_path(result_dir_path, "ptr_gabor_real_image.pgm");

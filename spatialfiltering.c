@@ -120,32 +120,46 @@ void gaussian1D(float *matrix, float radius)
 
 void gaussian2Delliptical(float **matrix, float radius, float sigmax, float sigmay, int rotation)
 {
+    radius = (float) 7.00;
+    sigmax = (float) 5.00;
+    sigmay = (float) 4.00;
+    rotation = (int) 0;
+
+    printf("parameter %f %f %f %d\n", radius, sigmax, sigmay, rotation);
+
 	int r = (int)radius;
 	int rows = r * 2 + 1;
 	//if (sigma == 0)
 	//	sigma = radius/3;
 
 	int col, row;
-	float total;
+	float total = 0.0f;
+
 
 	//float sigmax = 3;
 	//float sigmay = 2;
 	for (col = -r; col <= r; col++) {
 		for (row = -r; row <= r; row++) {
+
 			float distance_row = row * row;
 			float distance_col = col * col;
 			float xg = fabs(row) * cos (rotation * M_PI / 180) - fabs(col) * sin (rotation * M_PI / 180);
 			float yg = fabs(row) * sin (rotation * M_PI / 180) + fabs(col) * cos (rotation * M_PI / 180);
 
-			if (distance > pow(radius, 2))
+            printf("%f %f\n", xg, yg);
+
+			if ((row*col) > pow(radius, 2))
 				matrix[col+r][row+r] = 0;
 			else
 				matrix[col+r][row+r] = (float)exp(-((xg * xg)/(sigmax * sigmax) + (yg * yg)/(sigmay * sigmay))) / (2 * M_PI * sigmax * sigmay);
+
+            //printf("Col row : %d %d %f\n", col+r, row+r, matrix[col+r][row+r]);
 
 			total += matrix[col+r][row+r];
 		}
 	}
 
+    printf("Total : %f\n", total);
 	int i,j;
 	//printf("gaussian2Delliptical\n");
 	for (j = 0; j < rows; j++) {

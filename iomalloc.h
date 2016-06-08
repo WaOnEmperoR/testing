@@ -7,6 +7,7 @@
 #include "structs.h"
 
 void *mymalloc( int size);
+char* concat(int count, ...);
 void **mymalloc2( int n1, int n2, int size);
 void ***mymalloc3(int n1, int n2, int n3, int size);
 void myfree2(void **ptr,int n1);
@@ -17,5 +18,7 @@ FILE *myfopen( char *filename, char *mode);
 void myfgets(void *ptr, int size, FILE *stream);
 unsigned char **read_image(char *filename,int *height,int *width);
 void write_output(char *filename, T_IMAGE *ptr_my_image);
+void write_txt_img(char *filename, T_IMAGE *ptr_my_image);
+void write_txt_arr(char *filename, float **arr, int panjang, int lebar);
 
 #endif // IOMALLOC_H_INCLUDED
